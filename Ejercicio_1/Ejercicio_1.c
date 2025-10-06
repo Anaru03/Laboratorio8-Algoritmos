@@ -25,3 +25,18 @@ int main() {
 
     printf("%-15s %-25s\n", "Size (n)", "Tiempo (segundos)");
     printf("-------------------------------------------\n");
+
+    for (int i = 0; i < num_values; i++) {
+        int n = n_values[i];
+        start = clock();
+        function(n);
+        end = clock();
+        cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+        printf("%-15d %-25f\n", n, cpu_time_used);
+    }
+
+    printf("-------------------------------------------\n");
+    printf("Nota: Los valores de tiempo pueden variar segun el sistema.\n");
+
+    return 0;
+}
