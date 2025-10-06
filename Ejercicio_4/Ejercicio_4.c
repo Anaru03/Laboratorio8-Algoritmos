@@ -1,9 +1,15 @@
 #include <stdio.h>
 
-int linearSearch(int arr[], int n, int x) {
+int linearSearchStepByStep(int arr[], int n, int x) {
+    printf("Buscando %d en el arreglo...\n", x);
     for (int i = 0; i < n; i++) {
-        if (arr[i] == x) return i;
+        printf("Comparando x con A[%d] = %d\n", i, arr[i]);
+        if (arr[i] == x) {
+            printf("¡Elemento encontrado en la posición %d!\n", i);
+            return i;
+        }
     }
+    printf("Elemento no encontrado.\n");
     return -1;
 }
 
@@ -12,16 +18,16 @@ int main() {
     int n = sizeof(arr)/sizeof(arr[0]);
 
     // Mejor caso
-    int x = 1;  // primer elemento
-    printf("Mejor caso: posición = %d\n", linearSearch(arr, n, x));
+    printf("\n--- Mejor caso ---\n");
+    linearSearchStepByStep(arr, n, 1);
 
     // Caso promedio
-    x = 3;  // elemento del medio
-    printf("Caso promedio: posición = %d\n", linearSearch(arr, n, x));
+    printf("\n--- Caso promedio ---\n");
+    linearSearchStepByStep(arr, n, 3);
 
     // Peor caso
-    x = 6;  // elemento que no existe
-    printf("Peor caso: posición = %d\n", linearSearch(arr, n, x));
+    printf("\n--- Peor caso ---\n");
+    linearSearchStepByStep(arr, n, 6);
 
     return 0;
 }
