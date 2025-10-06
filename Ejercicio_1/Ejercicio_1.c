@@ -18,13 +18,13 @@ int main() {
     clock_t start, end;
     double cpu_time_used;
 
-    printf("===========================================\n");
-    printf("  Resultados del Ejercicio 1\n");
-    printf("  Complejidad Teorica: O(n^2 log n)\n");
-    printf("===========================================\n\n");
+    FILE *fp = fopen("results.csv", "w");  // <-- archivo CSV
+    if (fp == NULL) {
+        printf("Error al crear el archivo CSV.\n");
+        return 1;
+    }
 
-    printf("%-15s %-25s\n", "Size (n)", "Tiempo (segundos)");
-    printf("-------------------------------------------\n");
+    fprintf(fp, "Tamaño(n),Tiempo(segundos)\n"); // encabezado CSV
 
     for (int i = 0; i < num_values; i++) {
         int n = n_values[i];
@@ -32,11 +32,12 @@ int main() {
         function(n);
         end = clock();
         cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-        printf("%-15d %-25f\n", n, cpu_time_used);
+
+        fprintf(fp, "%d,%f\n", n, cpu_time_used);  // <-- guarda los resultados
     }
 
-    printf("-------------------------------------------\n");
-    printf("Nota: Los valores de tiempo pueden variar segun el sistema.\n");
+    fclose(fp);
 
+    printf("Resultados guardados en results.csv\n");
     return 0;
 }
